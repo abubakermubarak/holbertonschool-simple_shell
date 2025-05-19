@@ -25,12 +25,16 @@
 	 char *lptr = NULL;
 	 size_t len = 0;
 	 ssize_t read;
+	 char *argv[2];
  
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
-		 printf("%s", lptr);
-		 printf("$ ");
+		if (execve(lptr, char *const __argv[2], NULL) == -1)
+		{
+			printf("$ ");
+			perror("ERROR!");
+		}
 	 }
  
 	 free(lptr);
