@@ -25,18 +25,24 @@
 	 char *lptr = NULL;
 	 size_t len = 0;
 	 ssize_t read;
-	 char *argv[2];
+	 char *argv[]={"/bin/ls", "-l", "/usr/", NULL};
  
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
-		if (execve(lptr, char *const __argv[2], NULL) == -1)
+		printf("Line 32\n");
+		if (execve(argv[0], argv, NULL) == -1)
 		{
+			printf("Line 34\n");
 			printf("$ ");
 			perror("ERROR!");
 		}
+		else
+	 {
+		printf("Line 42\n");
 	 }
- 
+	 }
+ printf("Line 39\n");
 	 free(lptr);
 	 printf("\n"); /* Clean newline after Ctrl+D */
 	 return (0);
