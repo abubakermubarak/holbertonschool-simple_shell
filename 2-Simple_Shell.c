@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <sys/wait.h> 
 /**
  * main - A very simple UNIX command line interpreter
  *
@@ -23,29 +23,35 @@
  int main(void)
  {
 	 char *lptr = NULL;
-	 size_t len = 0;
+	 size_t *len;
 	 ssize_t read;
-	 char *argv;
-
+	 char *argv[4];
+	 pid_t pid;
+	 int status;
 	 /* Read lines until EOF (Ctrl+D) */
-	 while ((read = getline(&lptr, &len, stdin)) != -1)
+	 while ((read = getline(&lptr, len, stdin)) != -1)
 	 {
 		printf("Line 32\n");
 		pid_t pid = fork();
 		if (pid == 0)
 		{
-			if (strlen(argv) != 0)
+			if (len != 0)
 			{
 				if (execve(argv[0], argv, NULL) == -1)
 				{
-					printf("Line 34\n");
-					printf("$ ");
-					perror("ERRor");
+					perror("./shell");
 				}
 				else
 				{
-					printf("Line 42\n");
+					/* Parent wait for the child to finish */
+					wait(&status);
+					printf("$ "); /* Show prompt again */
 				}
+			}
+			else
+			{
+				printf("ERRoR: no input\n");
+				printf("$ ");
 			}
 	 	}
 	}
