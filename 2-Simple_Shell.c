@@ -34,15 +34,18 @@
 		pid_t pid = fork();
 		if (pid == 0)
 		{
-			if (execve(argv[0], argv, NULL) == -1)
+			if (strlen(argv) != 0)
 			{
-				printf("Line 34\n");
-				printf("$ ");
-				perror("ERRor");
-			}
-			else
-			{
-				printf("Line 42\n");
+				if (execve(argv[0], argv, NULL) == -1)
+				{
+					printf("Line 34\n");
+					printf("$ ");
+					perror("ERRor");
+				}
+				else
+				{
+					printf("Line 42\n");
+				}
 			}
 	 	}
 	}
