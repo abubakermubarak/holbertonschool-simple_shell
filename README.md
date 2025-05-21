@@ -2,4 +2,4 @@
 Simple Shell
 test
 
-# PRs should be reviewed before merge to main
+To be completed 
