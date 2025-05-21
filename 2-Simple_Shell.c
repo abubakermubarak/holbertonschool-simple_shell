@@ -43,18 +43,20 @@
 				if (execve(argv[0], argv, NULL) == -1)
 				{
 					printf("Un executable command\n");
-
-					/*perror("ERRor");*/
+					// exit -- > can't execute command
 				}
 			}
+			/*
 			else
 			{
 				printf("No Input\n");
 			}
+			*/
 			printf("$ ");
 	 	}
 	}
- //printf("Line 39\n");
+	// exit() command not found
+ 	printf("Line 39\n");
 	 free(lptr);
 	 //printf("\n");
 	 return (0);
