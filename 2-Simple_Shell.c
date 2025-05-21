@@ -1,8 +1,10 @@
+#define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/wait.h> 
+#include <sys/types.h>
+
 /**
  * main - A very simple UNIX command line interpreter
  *
@@ -23,40 +25,38 @@
  int main(void)
  {
 	 char *lptr = NULL;
-	 size_t *len;
+	 size_t len = 0;
 	 ssize_t read;
-	 char *argv[4];
-	 pid_t pid;
-	 int status;
+	 char *argv[64];
+	 int i = 0;
+
 	 /* Read lines until EOF (Ctrl+D) */
-	 while ((read = getline(&lptr, len, stdin)) != -1)
+	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
-		printf("Line 32\n");
+		/*printf("Line 32\n");*/
 		pid_t pid = fork();
 		if (pid == 0)
 		{
-			if (len != 0)
+			argv[0] = lptr;
+			if (read > 1)
 			{
+
 				if (execve(argv[0], argv, NULL) == -1)
 				{
-					perror("./shell");
-				}
-				else
-				{
-					/* Parent wait for the child to finish */
-					wait(&status);
-					printf("$ "); /* Show prompt again */
+					printf("Un executable command\n");
+
+					/*perror("ERRor");*/
 				}
 			}
 			else
 			{
-				printf("ERRoR: no input\n");
-				printf("$ ");
+				printf("No Input\n");
 			}
+			printf("$ ");
 	 	}
 	}
- printf("Line 39\n");
+ //printf("Line 39\n");
 	 free(lptr);
-	 printf("\n"); /* Clean newline after Ctrl+D */
+	 //printf("\n");
 	 return (0);
  }
