@@ -26,6 +26,13 @@
  }
  int main(void)
  {
+	/*
+	* Check if in interactive mode
+	* Check if the command is built-in
+	* check if the command is "exit"
+	* Try to execute the program
+	*/
+
 	 char *lptr = NULL;
 	 size_t len = 0;
 	 ssize_t read;
