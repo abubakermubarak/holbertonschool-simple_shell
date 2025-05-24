@@ -1,41 +1,32 @@
 #include "holberton.h"
-char** split(char *string, char *delimiter)
+list_t* split(char *string, char *delimiter)
 {
-    int counter,i;
-    counter = 0;
-    char **sub_strings = NULL;
-    char *string_copy;
+    int i=0;
+    int lenn=sizeof(string);
+    list_t *head = NULL;
+    list_t *tail = NULL;
+    list_t *sub_strings = (list_t*)malloc(sizeof(list_t));
+    printf("sizeof %ld\n",sizeof(list_t));
     char *token;
-    string_copy = strdup(string);
-    token = strtok(string_copy, delimiter);
-    while (token != NULL)
-    {
-        counter++;
-        token = strtok(NULL, delimiter);
-    }
-    free(string_copy);
-    if (counter == 0)
-    {
-        return (NULL);
-    }
-    sub_strings = malloc((counter * sizeof(char *)) + 1);
-    if (sub_strings == NULL)
-    {
-        return (NULL);
-    }
-    i = 0;
-    token  = strtok(string, delimiter);
-    while (token != NULL)
-    {
-        sub_strings[i] = malloc(sizeof(strlen(token) + 1));
-        if (sub_strings[i] == NULL)
-        {
-            return (NULL);
+    token = strtok(string, delimiter);
+    list_t *temp = head;
+    while (token != NULL) {
+
+        list_t *new_node= (list_t*)malloc(sizeof(list_t));
+        new_node->str=strdup(token);
+        new_node->num=i;
+        new_node->next = NULL;
+
+        if (head ==NULL){
+            tail=new_node;
+            head=new_node;
         }
-        strcpy(sub_strings[i], token);
+        else {
+            tail->next=new_node;
+        }
+        token = strtok(NULL, " - ");
+        // free(temp);
         i++;
-        token = strtok(NULL, delimiter);
     }
-    sub_strings[counter] = NULL;
-    return (sub_strings);
+    return (head);
 }
