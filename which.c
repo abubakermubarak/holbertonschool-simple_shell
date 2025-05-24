@@ -1,3 +1,4 @@
+
 #include "holberton.h"
 
 
@@ -8,7 +9,7 @@ int len;
 struct stat st;
 char *path = getenv("PATH");
     //filename=ls
-char **dir = {"bin/","/usr/bin","/bin/","/usr/bin/"};
+char **dir = split(path, ":");
 len = sizeof(dir);
 char* paths[len];
 

@@ -7,5 +7,5 @@
 #include <stdlib.h>
 #include <string.h>
 int execute(char *argv[]);
-char** split(char *string, char *delimiter);
+char** tokenizr(char *string, char *delimiter);
 #endif
