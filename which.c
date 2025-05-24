@@ -1,4 +1,3 @@
-
 #include "holberton.h"
 
 
@@ -9,21 +8,21 @@ int len;
 struct stat st;
 char *path = getenv("PATH");
     //filename=ls
-char **dir = split(path, ":");
+char **dir = {"bin/","/usr/bin","/bin/","/usr/bin/"};
 len = sizeof(dir);
 char* paths[len];
 
 for (i = 0; i<len-1; i++)
 {
-    int l = strlen(dir[i]);  
-  
+    int l = strlen(dir[i]);
+
     // Add the new character at the end
     dir[i][l] = '/';
-  
+
     // Add the null terminator
     dir[i][l + 1] = '\0';
     paths[i]=strcat(dir[i],filename);
-    
+
 }
 
 i=0;
@@ -38,7 +37,7 @@ while (paths[i])
         else
         {
             printf("Not correct \n");
-            
+
         }
         i++;
     }
