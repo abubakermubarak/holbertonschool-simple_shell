@@ -34,42 +34,33 @@
 	 int status;
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
-	 {
+	{
 		
-		if (is_built_in(lptr))
+		printf("intput: %li chacaters\n", read);
+		if (lptr[read-1] == '\n')
+		{
+			lptr[read-1] = '\0';
+			printf("replaced n with \\0\n");
+		}
+		if (is_built_in(lptr) == true)
 		{
 			printf("bulit-in\n");
-			/*printf("Line 32\n");*/
-			pid_t pid = fork();
-			if (pid == -1)
+			char *command = split(lptr, " ")[0];
+			printf("command : %s\n", command);
+			/* Check if command is exit*/
+			if (strcmp(command, "exit") == 0)
 			{
-				printf("Fork Failed\n");
+				printf("exiting......\n");
 				exit(2);
 			}
-			if (pid == 0)
-			{
-				argv[0] = lptr;
-				if (read > 1)
-				{
-
-					if (execve(argv[0], argv, NULL) == -1)
-					{
-						printf("Un executable command\n");
-						exit(3);
-						// exit -- > can't execute command
-					}
-					else
-					{
-						wait(&status);
-					}
-				}
-			}
-			/*
 			else
 			{
-				printf("No Input\n");
+				char **argv = split(lptr, " ");
+				printf("Executing command\n");
+				//execute(argv);
+				printf("$ ");
 			}
-			*/
+				
 			
 	 	}
 		else
@@ -77,10 +68,12 @@
 			printf("Not built-in\n");
 			exit(1);
 		}
+		
 	}
+	
 	// exit() command not found
  	//printf("Line 39\n");
 	 free(lptr);
-	 //printf("\n");
-	 return (0);
+	printf("\n");
+	return (0);
  }
