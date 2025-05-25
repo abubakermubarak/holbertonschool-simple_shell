@@ -49,5 +49,5 @@ bool in_path(char *string);
 char *_which(const char *filename);
 void print_int_array(int *a, int n);
 void print_char_array(char **list, int n);
-void print_linked_list(list_t *head)
+void print_linked_list(list_t *head);
 #endif
