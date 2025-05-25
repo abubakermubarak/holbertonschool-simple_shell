@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stddef.h>
-#include <unistd.h>
-#include <errno.h>      /* For perror */
-#include <sys/types.h>  /* For pid_t */
-#include <sys/wait.h>   /* For wait */
+#include "holberton.h"
 
 /**
  * main - A very simple UNIX command line interpreter
@@ -42,28 +35,31 @@
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
-		/*printf("Line 32\n");*/
-		pid_t pid = fork();
-		if (pid == -1)
+		if (!is_built_in(lptr))
 		{
-			printf("Fork Failed\n");
-			exit(1);
-		}
-		if (pid == 0)
-		{
-			argv[0] = lptr;
-			if (read > 1)
+			/*printf("Line 32\n");*/
+			pid_t pid = fork();
+			if (pid == -1)
 			{
+				printf("Fork Failed\n");
+				exit(2);
+			}
+			if (pid == 0)
+			{
+				argv[0] = lptr;
+				if (read > 1)
+				{
 
-				if (execve(argv[0], argv, NULL) == -1)
-				{
-					printf("Un executable command\n");
-					exit(2);
-					// exit -- > can't execute command
-				}
-				else
-				{
-					wait(&status);
+					if (execve(argv[0], argv, NULL) == -1)
+					{
+						printf("Un executable command\n");
+						exit(3);
+						// exit -- > can't execute command
+					}
+					else
+					{
+						wait(&status);
+					}
 				}
 			}
 			/*
@@ -72,8 +68,13 @@
 				printf("No Input\n");
 			}
 			*/
-			printf("$ ");
+			
 	 	}
+		else
+		{
+			printf("Not built-in\n");
+			exit(1);
+		}
 	}
 	// exit() command not found
  	//printf("Line 39\n");

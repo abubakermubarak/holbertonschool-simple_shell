@@ -1,22 +1,25 @@
 #include "holberton.h"
-node* append(node **head , char *string)
+node* append(node *head , char *string)
 {
     node *new = malloc(sizeof(node));
     if (new == NULL)
     {
         return (NULL);
     }
-    new->str = string;
+    new->str = strdup(string);
     new->next = NULL;
     if (head == NULL)
     {
-        return new;
+        head = new;
     }
-    node* tmp = head;
-    while(tmp->next != NULL)
+    else
     {
-        tmp = tmp->next;
+        node* tmp = head;
+        while(tmp->next != NULL)
+        {
+            tmp = tmp->next;
+        }
+        tmp->next = new;
     }
-    tmp->next = new;
     return (head);
 }
