@@ -1,16 +1,8 @@
 #include "holberton.h"
 
 /**
- * main - A very simple UNIX command line interpreter
- *
- * Description:
- * - Displays a prompt ($)
- * - Reads a command (one word only)
- * - Executes it using execve
- * - Print an error if the command doesn't exist
- * - Repeats until Ctrl+D (EOF)
- *
- * Return: Always 0
+ * main - Simple UNIX shell (Task 2)
+ * Return: 0 on success, 1 on error
  */
 
  void __attribute__ ((constructor)) premain()
