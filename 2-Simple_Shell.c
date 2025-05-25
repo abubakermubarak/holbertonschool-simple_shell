@@ -35,8 +35,11 @@
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
-		if (!is_built_in(lptr))
+		
+		printf("Entered while\n");
+		if (is_built_in(lptr))
 		{
+			printf("bulit-in\n");
 			/*printf("Line 32\n");*/
 			pid_t pid = fork();
 			if (pid == -1)

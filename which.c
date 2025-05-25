@@ -4,9 +4,8 @@
 
 char * _which(char * filename)
 {
-int i;
-int len;
-struct stat st;
+ st t;
+int len, i;
 char *path = getenv("PATH");
     //filename=ls
 char **dir = split(path, ":");
@@ -30,7 +29,7 @@ i=0;
 while (paths[i])
     {
         printf("%s:", paths[i]);
-        if (stat(paths[i], &st) == 0)
+        if (stat(paths[i], &t) == 0)
         {
             printf(" FOUND\n");
             return paths[i];
