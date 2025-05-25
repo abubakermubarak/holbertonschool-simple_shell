@@ -4,6 +4,7 @@ bool is_built_in(char *command)
 {
     int i,l, len;
     st t;
+    /**/
     if (command[strlen(command)] != '\0')
     {
         command[strlen(command)] = '\0';
