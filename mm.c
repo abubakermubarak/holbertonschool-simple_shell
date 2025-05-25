@@ -4,41 +4,45 @@ char** splitStr(char* text,char*splitter){
 
     int i = 0;
     int len = 0;
-    splitter = ",";
+
     len=sizeof(text);
-    char * my_array[len];
+
+    printf("entered function\n");
+    char **my_array = malloc(sizeof(char *) * len);
+
+
     char *new_str;
     int acountr=0;
+    printf("%d\n", len);
     for (i = 0; i < len - 1; i++)
     {
+
         if(text[i] == splitter[0])
         {
+            printf("entered id\n");
             my_array[acountr]=new_str;
             acountr++;
             new_str="";
         }
-        new_str = &text[i];
+        else{
+            new_str = &text[i];
+
+        }
+        printf("%c\n", text[i]);
     }
-    return (my_array); 
+
+    printf("finished loop\n");
+    return (my_array);
 
 }
 int main(void){
 
-    int i, len;
-    char text[] = {"adskhbad,ljadn,alkdni,daaa"};
-    for (i = 0; i < len - 1; i++){
-        char *new_arr = &text[i];
+    int i;
+    char *text = "/mnt/c/Users/Lenovo/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Lenovo/.dotnet/tools:/mnt/c/Users/Lenovo/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Exercism:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2023.3.2/bin:/mnt/c/Users/Lenovo/AppData/Local/Programs/cursor/resources/app/bin:/snap/bin:/home/useradd/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand";
 
-    }
-    printf("%s\n", (char *)splitStr(text, ","));
+    char** test = splitStr(text, ":");
+    int len = sizeof(test);
+    print_char_array(test, len);
+    return 0;
 }
 
-
-
-/*    char *path = getenv("PATH");
-    //filename=ls
-char *dir = strtok(path, ":");
-printf("%s\n",dir);
-return 0;
-}
-*/
