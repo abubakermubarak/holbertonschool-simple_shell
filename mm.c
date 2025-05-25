@@ -15,13 +15,11 @@ char** splitStr(char* text,char*splitter){
         {
             my_array[acountr]=new_str;
             acountr++;
-
             new_str="";
         }
         new_str = &text[i];
     }
-
-
+    return (my_array); 
 
 }
 int main(void){
@@ -29,10 +27,10 @@ int main(void){
     int i, len;
     char text[] = {"adskhbad,ljadn,alkdni,daaa"};
     for (i = 0; i < len - 1; i++){
-        char *new_arr[] = &text[i];
+        char *new_arr = &text[i];
 
     }
-    printf("%s\n", splitStr(text, ","));
+    printf("%s\n", (char *)splitStr(text, ","));
 }
 
 
