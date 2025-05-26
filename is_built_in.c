@@ -23,6 +23,7 @@ bool is_built_in(char *command)
         /* Add the null terminator */
         dir[i][l + 1] = '\0';
         paths[i]=strcat(dir[i],command);/* >> /bin/ls*/
+        printf("After strcat\n");    
     }
     i = 0;
     while (paths[i])
