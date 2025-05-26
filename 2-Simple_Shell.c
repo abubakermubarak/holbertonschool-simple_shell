@@ -53,11 +53,16 @@
 				printf("exiting......\n");
 				exit(2);
 			}
+			else if(strcmp(command, "env") == 0)
+			{
+				env();
+				exit(3);
+			}
 			else
 			{
 				char **argv = split(lptr, " ");
 				printf("Executing command\n");
-				//execute(argv);
+				execute(argv);
 				printf("$ ");
 			}
 				
