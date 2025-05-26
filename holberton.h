@@ -1,20 +1,29 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
-
 #include <stdio.h>
+#include <stdbool.h>
+
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
 #include <unistd.h>
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
-/* Macros */
-#define PROMPT "$ "
-#define MAX_ARGS 2
+#include <errno.h>      /* For perror */
+#include <sys/types.h>  /* For pid_t */
+#include <sys/wait.h> 
+#include <sys/stat.h>
+typedef struct stat st;
+typedef struct node
+{
+    char *str;
+    struct node* next;
+}node;
 
-/* Function Prototypes */
+char** split(char *string, char *delimiter);
+node* append(node *head , char *string);
+node* get_path(char **path);
+bool is_built_in(char *command);
+
 
 int is_input(char *command);  /* Returns True or False */
 
@@ -30,14 +39,9 @@ int execute(char *argv[]);
 /* Tokeniz the input line into arguments */
 void tokenize_command(char *line, char *argv);
 
-/* Checks if a command is a built-in */
-int is_builtin(char *command);  /* Returns True or False */
-
 /* Fork and Executes a built-in command */
 int execute_builtin(char *command);
 
-/* Execute command */
-int execute(char *argv[]);
 
 /*Checks if the string is found in the Global Variable */
 bool in_path(char *string);
@@ -47,3 +51,4 @@ char *_which(const char *filename);
 
 
 #endif /* HOLBERTON_H */
+
