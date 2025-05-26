@@ -21,4 +21,6 @@ char** split(char *string, char *delimiter);
 node* append(node *head , char *string);
 node* get_path(char **path);
 bool is_built_in(char *command);
+char * _which(char * filename);
+void env(void);
 #endif
