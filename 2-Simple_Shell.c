@@ -1,9 +1,18 @@
 #include "holberton.h"
 
+
 /**
  * main - Simple UNIX shell (Task 2)
  * Return: 0 on success, 1 on error
  */
+int main(void)
+{
+    char *lptr = NULL;
+    size_t len = 0;
+    ssize_t read;
+    char *argv[2];
+    pid_t pid;
+    int status;
 
  void __attribute__ ((constructor)) premain()
  {
