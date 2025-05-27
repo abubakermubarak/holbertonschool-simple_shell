@@ -47,7 +47,7 @@
 *.idb
 *.pdb
 
-abubaker
+*.holberton
 
 # Kernel Module Compile Results
 *.mod*
