@@ -14,7 +14,7 @@ bool is_built_in(char *command)
     char **dir = split(path, ":");
     len = sizeof(dir);
     char* paths[len];
-    printf("before loop\n");
+    //printf("before loop\n");
     for (i = 0; i<len-2; i++)
     {
         l = strlen(dir[i]);
@@ -23,7 +23,7 @@ bool is_built_in(char *command)
         /* Add the null terminator */
         dir[i][l + 1] = '\0';
         paths[i]=strcat(dir[i],command);/* >> /bin/ls*/
-        printf("After strcat\n");    
+        //printf("After strcat\n");    
     }
     i = 0;
     while (paths[i])
