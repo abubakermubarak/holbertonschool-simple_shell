@@ -40,7 +40,7 @@
 		if (lptr[read-1] == '\n')
 		{
 			lptr[read-1] = '\0';
-			printf("replaced n with \\0\n");
+			//printf("replaced n with \\0\n");
 		}
 		if (is_built_in(lptr) == true)
 		{
