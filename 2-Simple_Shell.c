@@ -36,7 +36,7 @@
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	{
 		
-		printf("intput: %li chacaters\n", read);
+		//printf("intput: %li chacaters\n", read);
 		if (lptr[read-1] == '\n')
 		{
 			lptr[read-1] = '\0';
@@ -44,14 +44,14 @@
 		}
 		if (is_built_in(lptr) == true)
 		{
-			printf("bulit-in\n");
+			//printf("bulit-in\n");
 			char *command = split(lptr, " ")[0];
 			printf("command : %s\n", command);
 			/* Check if command is exit*/
 			if (strcmp(command, "exit") == 0)
 			{
 				printf("exiting......\n");
-				exit(2);
+				exit(-1);
 			}
 			else if(strcmp(command, "env") == 0)
 			{
