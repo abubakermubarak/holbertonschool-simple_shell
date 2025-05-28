@@ -36,6 +36,6 @@ char** split(char *string, char *delimiter)
         i++;
         token = strtok(NULL, delimiter);
     }
-    sub_strings[counter] = NULL;
+    //sub_strings[counter] = NULL;
     return (sub_strings);
 }
