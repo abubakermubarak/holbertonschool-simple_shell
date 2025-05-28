@@ -76,7 +76,7 @@ int main(void)
 		}
 		
 	}
-	
+}	
 	// exit() command not found
  	//printf("Line 39\n");
 	 free(lptr);
