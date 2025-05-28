@@ -47,8 +47,8 @@ int execute_builtin(char *command);
 bool in_path(char *string);
 
 /*Find a path */
-char *_which(const char *filename);
+char *_which(char *filename);
 
-
+void env(void);
 #endif /* HOLBERTON_H */
 
