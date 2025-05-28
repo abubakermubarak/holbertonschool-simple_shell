@@ -18,6 +18,7 @@ int main(void)
  {
 	 printf("$ ");
  }
+}
  int main(void)
  {
 	/*
@@ -33,21 +34,25 @@ int main(void)
 	 char *argv[64];
 	 int i = 0;
 	 int status;
+	 char * path;
+
+	 char *full_path;
+
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	{
-		
+
 		//printf("intput: %li chacaters\n", read);
 		if (lptr[read-1] == '\n')
 		{
 			lptr[read-1] = '\0';
 			//printf("replaced n with \\0\n");
 		}
-		if (is_built_in(lptr) == true)
+		else if (is_built_in(lptr) == true)
 		{
 			//printf("bulit-in\n");
 			char *command = split(lptr, " ")[0];
-			printf("command : %s\n", command);
+			printf("command : %s\n");
 			/* Check if command is exit*/
 			if (strcmp(command, "exit") == 0)
 			{
@@ -61,22 +66,33 @@ int main(void)
 			}
 			else
 			{
-				char **argv = split(lptr, " ");
-				printf("Executing command\n");
-				execute(argv);
+				/*my modif.*/
+				char *full_path = _which(command);
+				if (full_path)
+
+					argv[0] = full_path;
+					execute(argv);
+				}
+
+            	printf("%s: command not found\n");
+        	}
+
+				/*modif. end*/
+
 				printf("$ ");
 			}
-				
-			
-	 	}
+		}
+
+
+
 		else
 		{
 			printf("Not built-in\n");
 			exit(1);
 		}
-		
+
 	}
-}	
+}
 	// exit() command not found
  	//printf("Line 39\n");
 	 free(lptr);

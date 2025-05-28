@@ -34,13 +34,6 @@ while (paths[i])
             //printf(" FOUND\n");
             return paths[i];
         }
-        /*
-        else
-        {
-            printf("Not correct \n");
-
-        }
-        */
         i++;
     }
     return NULL;
