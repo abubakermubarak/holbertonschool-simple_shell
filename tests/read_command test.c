@@ -14,5 +14,5 @@ int main(void)
     {
         printf("just hit Enter\n");
     }
-    
+    printf("%s\n", lptr);
 }
