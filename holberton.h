@@ -2,17 +2,53 @@
 #define HOLBERTON_H
 #include <stdio.h>
 #include <stdbool.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+
 #include <stdlib.h>
 #include <string.h>
+#include <stddef.h>
+#include <unistd.h>
+
+#include <errno.h>      /* For perror */
+#include <sys/types.h>  /* For pid_t */
+#include <sys/wait.h>
+#include <sys/stat.h>
+typedef struct stat st;
+typedef struct node
+{
+    char *str;
+    struct node* next;
+}node;
+
+char** split(char *string, char *delimiter);
+node* append(node *head , char *string);
+node* get_path(char **path);
+bool is_built_in(char *command);
+
+
+int is_input(char *command);  /* Returns True or False */
+
+/* Prints the shell prompt ($) */
+void print_prompt(void);
+
+/* Reads command from standard input */
+ssize_t read_command(char **lineptr, size_t *n);
+
+/* Creates a child process to run a command */
 int execute(char *argv[]);
-char** tokenizr(char *string, char *delimiter);
 
-char** splitStr(char* text,char*splitter);
+/* Tokeniz the input line into arguments */
+void tokenize_command(char *line, char *argv);
 
-void print_int_array(int *a, int n);
-void print_char_array(char ** list, int n);
+/* Fork and Executes a built-in command */
+int execute_builtin(char *command);
 
 
-#endif
+/*Checks if the string is found in the Global Variable */
+bool in_path(char *string);
+
+/*Find a path */
+char *_which(const char *filename);
+
+
+#endif /* HOLBERTON_H */
+

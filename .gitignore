@@ -40,6 +40,7 @@
 *.i*86
 *.x86_64
 *.hex
+*.io
 
 # Debug files
 *.dSYM/
@@ -47,7 +48,7 @@
 *.idb
 *.pdb
 
-abubaker
+*.holberton
 
 # Kernel Module Compile Results
 *.mod*

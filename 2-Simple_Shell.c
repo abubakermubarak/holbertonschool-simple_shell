@@ -1,24 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stddef.h>
-#include <unistd.h>
-#include <errno.h>      /* For perror */
-#include <sys/types.h>  /* For pid_t */
-#include <sys/wait.h>   /* For wait */
+#include "holberton.h"
+
 
 /**
- * main - A very simple UNIX command line interpreter
- *
- * Description:
- * - Displays a prompt ($)
- * - Reads a command (one word only)
- * - Executes it using execve
- * - Print an error if the command doesn't exist
- * - Repeats until Ctrl+D (EOF)
- *
- * Return: Always 0
+ * main - Simple UNIX shell (Task 2)
+ * Return: 0 on success, 1 on error
  */
+int main(void)
+{
+    char *lptr = NULL;
+    size_t len = 0;
+    ssize_t read;
+    char *argv[2];
+    pid_t pid;
+    int status;
 
  void __attribute__ ((constructor)) premain()
  {
@@ -41,43 +35,51 @@
 	 int status;
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
-	 {
-		/*printf("Line 32\n");*/
-		pid_t pid = fork();
-		if (pid == -1)
+	{
+		
+		//printf("intput: %li chacaters\n", read);
+		if (lptr[read-1] == '\n')
 		{
-			printf("Fork Failed\n");
-			exit(1);
+			lptr[read-1] = '\0';
+			//printf("replaced n with \\0\n");
 		}
-		if (pid == 0)
+		if (is_built_in(lptr) == true)
 		{
-			argv[0] = lptr;
-			if (read > 1)
+			//printf("bulit-in\n");
+			char *command = split(lptr, " ")[0];
+			printf("command : %s\n", command);
+			/* Check if command is exit*/
+			if (strcmp(command, "exit") == 0)
 			{
-
-				if (execve(argv[0], argv, NULL) == -1)
-				{
-					printf("Un executable command\n");
-					exit(2);
-					// exit -- > can't execute command
-				}
-				else
-				{
-					wait(&status);
-				}
+				printf("exiting......\n");
+				exit(-1);
 			}
-			/*
+			else if(strcmp(command, "env") == 0)
+			{
+				env();
+				exit(3);
+			}
 			else
 			{
-				printf("No Input\n");
+				char **argv = split(lptr, " ");
+				printf("Executing command\n");
+				execute(argv);
+				printf("$ ");
 			}
-			*/
-			printf("$ ");
+				
+			
 	 	}
+		else
+		{
+			printf("Not built-in\n");
+			exit(1);
+		}
+		
 	}
+}	
 	// exit() command not found
  	//printf("Line 39\n");
 	 free(lptr);
-	 //printf("\n");
-	 return (0);
+	printf("\n");
+	return (0);
  }

@@ -4,9 +4,8 @@
 
 char * _which(char * filename)
 {
-int i;
-int len;
-struct stat st;
+ st t;
+int len, i;
 char *path = getenv("PATH");
     //filename=ls
 char **dir = split(path, ":");
@@ -29,22 +28,27 @@ for (i = 0; i<len-1; i++)
 i=0;
 while (paths[i])
     {
-        printf("%s:", paths[i]);
-        if (stat(paths[i], &st) == 0)
+        //printf("%s:", paths[i]);
+        if (stat(paths[i], &t) == 0)
         {
-            printf(" FOUND\n");
+            //printf(" FOUND\n");
             return paths[i];
         }
+        /*
         else
         {
             printf("Not correct \n");
 
         }
+        */
         i++;
     }
     return NULL;
 }
+/*
 int main(void)
 {
-    _which("ls");
+    char *path = _which("ls");
+    printf("%s\n", path);
 }
+*/
