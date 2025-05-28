@@ -1,23 +1,14 @@
 #include "holberton.h"
 
-
+void __attribute__ ((constructor)) premain()
+{
+	printf("$ ");
+}
 /**
  * main - Simple UNIX shell (Task 2)
  * Return: 0 on success, 1 on error
- */
-int main(void)
-{
-    char *lptr = NULL;
-    size_t len = 0;
-    ssize_t read;
-    char *argv[2];
-    pid_t pid;
-    int status;
+*/
 
- void __attribute__ ((constructor)) premain()
- {
-	 printf("$ ");
- }
  int main(void)
  {
 	/*
@@ -30,14 +21,16 @@ int main(void)
 	 char *lptr = NULL;
 	 size_t len = 0;
 	 ssize_t read;
-	 char *argv[64];
+	 char **argv;
 	 int i = 0;
+	 char *path;
 	 int status;
 	 /* Read lines until EOF (Ctrl+D) */
+	 
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	{
 		
-		//printf("intput: %li chacaters\n", read);
+		printf("intput: %li chacaters\n", read);
 		if (lptr[read-1] == '\n')
 		{
 			lptr[read-1] = '\0';
@@ -61,7 +54,16 @@ int main(void)
 			}
 			else
 			{
-				char **argv = split(lptr, " ");
+				//char**argv = split(lptr, " "); >>  -l /tmp/ 
+				argv = split(lptr, " ");
+				printf("split finished\n");
+				path = _which(argv[0]);
+				if(path == NULL)
+				{
+					printf("path is NULL\n");
+				}
+				printf("%s\n", path);
+				argv[0] = strcpy(argv[0], path);
 				printf("Executing command\n");
 				execute(argv);
 				printf("$ ");
@@ -76,10 +78,10 @@ int main(void)
 		}
 		
 	}
-}	
+	
 	// exit() command not found
  	//printf("Line 39\n");
 	 free(lptr);
 	printf("\n");
 	return (0);
- }
+} 
