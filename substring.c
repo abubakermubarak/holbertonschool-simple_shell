@@ -1,41 +1,54 @@
 #include "holberton.h"
-char** split(char *string, char *delimiter)
+char **split(char *string, char *delimiter)
 {
-    int counter,i;
-    counter = 0;
+    int counter = 0, i = 0;
     char **sub_strings = NULL;
-    char *string_copy;
+    char *string_copy1 = strdup(string);
+    char *string_copy2 = strdup(string);
     char *token;
-    string_copy = strdup(string);
-    token = strtok(string_copy, delimiter);
+
+    if (!string_copy1 || !string_copy2)
+        return NULL;
+
+    // First pass: count tokens
+    token = strtok(string_copy1, delimiter);
     while (token != NULL)
     {
         counter++;
         token = strtok(NULL, delimiter);
     }
-    free(string_copy);
+    free(string_copy1);
+
     if (counter == 0)
     {
-        return (NULL);
+        // must free before return
+        free(string_copy2);
+        return NULL;
     }
-    sub_strings = malloc((counter * sizeof(char *)) + 1);
+
+    // +1 for NULL terminator \0
+    sub_strings = malloc((counter + 1) * sizeof(char *));
     if (sub_strings == NULL)
     {
-        return (NULL);
+        free(string_copy2);
+        return NULL;
     }
-    i = 0;
-    token  = strtok(string, delimiter);
+
+    // Second pass: actually split and copy
+    token = strtok(string_copy2, delimiter);
     while (token != NULL)
     {
-        sub_strings[i] = malloc(sizeof(strlen(token) + 1));
+        sub_strings[i] = malloc(strlen(token) + 1); // strlen + \0
         if (sub_strings[i] == NULL)
         {
-            return (NULL);
+            return NULL;
         }
         strcpy(sub_strings[i], token);
         i++;
         token = strtok(NULL, delimiter);
     }
-    //sub_strings[counter] = NULL;
+    sub_strings[i] = NULL;
+
+    free(string_copy2);
     return (sub_strings);
 }

@@ -54,18 +54,13 @@ void __attribute__ ((constructor)) premain()
 			}
 			else
 			{
-				//char**argv = split(lptr, " "); >>  -l /tmp/ 
-				argv = split(lptr, " ");
-				printf("split finished\n");
-				path = _which(argv[0]);
-				if(path != NULL)
-				{
-					printf("path is : %s\n", path);
-				}
+				
+				path = _which(command);
+				
 				printf("%s\n", path);
-				argv[0] = strcpy(argv[0], path);
-				printf("Executing command\n");
-				execute(argv);
+				// argv[0] = strcpy(argv[0], path);
+				// printf("Executing command\n");
+				// execute(argv);
 				printf("$ ");
 			}
 				
