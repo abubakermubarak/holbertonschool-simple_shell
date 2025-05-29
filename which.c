@@ -42,6 +42,6 @@ while (paths[i])
     free(paths[j]);
 }
 free(paths);
-    printf("NOT FOUND\n");
+    //printf("NOT FOUND\n");
     return NULL;
 }
