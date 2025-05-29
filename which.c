@@ -9,11 +9,11 @@ int len, i;
 char *path = getenv("PATH");
     //filename=ls
 char **dir = split(path, ":");
-len = sizeof(dir)/sizeof(dir[0]);
+len = sizeof(dir);
 char* paths[len];
-printf("%s\n", path);
-printf("len : %i\n", len);
-for (i = 0; i<len; i++)
+//printf("%s\n", path);
+//printf("len : %i\n", len);
+for (i = 0; i<len-1; i++)
 {
     int l = strlen(dir[i]);  
   
@@ -29,10 +29,10 @@ for (i = 0; i<len; i++)
 i=0;
 while (paths[i])
     {
-        printf("%s:", paths[i]);
+        //printf("%s:", paths[i]);
         if (stat(paths[i], &t) == 0)
         {
-            printf(" FOUND\n");
+            //printf(" FOUND\n");
             return paths[i];
         }
         i++;
@@ -40,10 +40,14 @@ while (paths[i])
     printf("NOT FOUND\n");
     return NULL;
 }
+//
 /*
 int main(void)
 {
-    char *path = _which("ls");
-    printf("%s\n", path);
+    char *path = _which("exit");
+    if (path != NULL)
+    {
+        printf("%s\n", path);
+    }
 }
 */
