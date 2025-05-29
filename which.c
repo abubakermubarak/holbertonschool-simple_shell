@@ -16,11 +16,11 @@ printf("%s\n", path);
 printf("len : %i\n", len);
 for (i = 0; i<len; i++)
 {
-    int l = strlen(dir[i]);  
-  
+    int l = strlen(dir[i]);
+
     // Add the new character at the end
     dir[i][l] = '/';
-  
+
     // Add the null terminator
     dir[i][l + 1] = '\0';
     paths[i]=strcat(dir[i],filename);

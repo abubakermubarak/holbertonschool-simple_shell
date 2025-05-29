@@ -10,7 +10,7 @@
 
 #include <errno.h>      /* For perror */
 #include <sys/types.h>  /* For pid_t */
-#include <sys/wait.h> 
+#include <sys/wait.h>
 #include <sys/stat.h>
 typedef struct stat st;
 typedef struct node
@@ -50,5 +50,6 @@ bool in_path(char *string);
 char *_which(char *filename);
 
 void env(void);
+int _atoi(char *string);
 #endif /* HOLBERTON_H */
 

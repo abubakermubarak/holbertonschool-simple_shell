@@ -1,20 +1,23 @@
 #include "holberton.h"
-int execute_builtin(char *command)
+int execute_builtin(char *path, char *argv[])
 {
-    /* check if the command is exit*/
-    if (strcmp(command, "exit") == 0)
-    {
-        exit();
+    //if (execve(argv[0], argv, NULL) == "exit")
+    //{
+        //printf("exit");
+    if(strcmp(argv[0], "exit") == 0){
+
+        int status = _atoi(argv[1]);
+        if(status == 0)
+        {
+            exit(-1);
+        }
+            exit(status);
     }
-    /* check if the command is env*/
-    else if (strcmp(command, "env") == 0)
-    {
-        env();
+
+    else{
+        execve(argv[0], argv, NULL);
+        printf("%s\n", argv[0]);
     }
-    else
-    {
-        /* Failed to execution*/
-        return (-1);
-    }
+
     return(0);
 }

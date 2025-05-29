@@ -56,7 +56,7 @@ void __attribute__ ((constructor)) premain()
 			printf("Not built-in\n");
 			exit(1);
 		}
-		
+
 	}
 	
 	// exit() command not found
