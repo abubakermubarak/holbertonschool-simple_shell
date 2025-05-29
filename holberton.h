@@ -10,7 +10,7 @@
 
 #include <errno.h>      /* For perror */
 #include <sys/types.h>  /* For pid_t */
-#include <sys/wait.h> 
+#include <sys/wait.h>
 #include <sys/stat.h>
 typedef struct stat st;
 typedef struct node
@@ -47,8 +47,9 @@ int execute_builtin(char *command);
 bool in_path(char *string);
 
 /*Find a path */
-char *_which(const char *filename);
+char *_which(char *filename);
 
 
+int _atoi(char *string);
 #endif /* HOLBERTON_H */
 

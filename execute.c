@@ -5,6 +5,8 @@ int execute(char *argv[])
 {
     int status;
     pid_t pid;
+    
+    //printf("command path: %s\n", argv[0]);
     pid = fork();
     if (pid == -1)
     {
