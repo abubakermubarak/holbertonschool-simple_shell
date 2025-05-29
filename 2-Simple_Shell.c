@@ -24,7 +24,9 @@ void __attribute__ ((constructor)) premain()
 	 char **argv;
 	 int i = 0;
 	 char *path;
+	 char *command;
 	 int status;
+
 	 /* Read lines until EOF (Ctrl+D) */
 	 
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
@@ -36,33 +38,16 @@ void __attribute__ ((constructor)) premain()
 			lptr[read-1] = '\0';
 			//printf("replaced n with \\0\n");
 		}
-		if (is_built_in(lptr) == true)
+		argv = split(lptr, ":");
+		command = argv[0];
+		path = _which(command);
+		if (path != NULL)
 		{
+			
+			execute_builtin(path, argv);
 			//printf("bulit-in\n");
-			char *command = split(lptr, " ")[0];
-			printf("command : %s\n", command);
-			/* Check if command is exit*/
-			if (strcmp(command, "exit") == 0)
-			{
-				printf("exiting......\n");
-				exit(-1);
-			}
-			else if(strcmp(command, "env") == 0)
-			{
-				env();
-				exit(3);
-			}
-			else
-			{
-				
-				path = _which(command);
-				
-				printf("%s\n", path);
-				// argv[0] = strcpy(argv[0], path);
-				// printf("Executing command\n");
-				// execute(argv);
-				printf("$ ");
-			}
+			
+
 				
 			
 	 	}
