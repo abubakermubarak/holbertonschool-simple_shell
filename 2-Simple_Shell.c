@@ -58,9 +58,9 @@ void __attribute__ ((constructor)) premain()
 				argv = split(lptr, " ");
 				printf("split finished\n");
 				path = _which(argv[0]);
-				if(path == NULL)
+				if(path != NULL)
 				{
-					printf("path is NULL\n");
+					printf("path is : %s\n", path);
 				}
 				printf("%s\n", path);
 				argv[0] = strcpy(argv[0], path);
