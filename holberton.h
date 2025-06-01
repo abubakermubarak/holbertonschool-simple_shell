@@ -24,6 +24,7 @@ typedef struct var
     char *value;
     struct var *next;
 }var;
+var *head = NULL;
 char** split(char *string, char *delimiter);
 node* append(node *head , char *string);
 node* get_path(char **path);
