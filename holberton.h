@@ -18,7 +18,12 @@ typedef struct node
     char *str;
     struct node* next;
 }node;
-
+typedef struct var 
+{
+    char *name;
+    char *value;
+    struct var *next;
+}var;
 char** split(char *string, char *delimiter);
 node* append(node *head , char *string);
 node* get_path(char **path);
