@@ -1,5 +1,5 @@
 #include "holberton.h"
-extern  var envo;
+// extern  var envo;
 int set_env(char *name, char *value, int overwrite)
 {
     if (name == NULL || strlen(name) == 0 || value == NULL)
@@ -14,7 +14,9 @@ int set_env(char *name, char *value, int overwrite)
     
     for (i = 0; i < len; i++)
     {
-        if (strcmp(envo[i]->name, name)== 0)
+        var tmp= envo[i];
+        char *tmpN=(char*)tmp.name;
+        if (strcmp(tmpN, name)== 0)
         {
             flag = true;
             if (overwrite != 0)
@@ -23,17 +25,20 @@ int set_env(char *name, char *value, int overwrite)
             }
         }
     }
-    if (flag == false)
-    {
-        var *new_var = malloc(sizeof(var));
-        if (new_var == NULL)
-        {
-            return (-1);
-        }
-        new_var->name = name;
-        new_var->value = value;
-        envo[i] = new_var;
-    }
-    free(new_var);
+    if (!flag)
+	{
+		for (i = 0; i < len; i++)
+		{
+			if (envo[i].name == NULL) // Find the first empty slot
+			{
+				envo[i].name = name;
+				envo[i].value = value;
+				return (0); // Successfully added
+			}
+		}
+		// If no empty slot is found
+		return (-1); // Indicate failure to add (array is full)
+	}
+    // free(new_var);
     return (0);
 }
