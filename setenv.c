@@ -9,17 +9,17 @@ int _setenv(char *name, char *value, int overwtite)
     bool flag;
     flag = false;
     int len, i;
-    len = sizeof(environment);
+    len = sizeof(environment) / sizeof(var);
     /* serach in the environment for the variable name*/
     
     for (i = 0; i < len; i++)
     {
-        if (strcmp(environment[i].name, name)== 0)
+        if (strcmp(environment[i]->name, name)== 0)
         {
             flag = true;
             if (overwtite != 0)
             {
-                environment[i].value = value;
+                environment[i]->value = value;
             }
         }
     }
@@ -34,5 +34,6 @@ int _setenv(char *name, char *value, int overwtite)
         new_var->value = value;
         environment[i] = new_var;
     }
+    free(new_var);
     return (0);
 }
