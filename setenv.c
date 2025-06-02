@@ -1,6 +1,6 @@
 #include "holbeton.h"
-
-int _setenv(char *name, char *value, int overwtite, var *head)
+extern environment;
+int _setenv(char *name, char *value, int overwtite)
 {
     if (name == NULL || strlen(name) == 0 || value == NULL)
     {
@@ -8,34 +8,31 @@ int _setenv(char *name, char *value, int overwtite, var *head)
     }
     bool flag;
     flag = false;
-    int fd;
-    ssize_t bytes_read;
-    int buffer_size;
-    buffer_size = 64
-    int buffer[buffer_size];
-    fd = open("ENV.txt", O_RDWR | O_CREAT);
-    /* serach in the linkedlist for the variable name*/
-    var *tmp = head;
-    while (tmp->next != NULL)
+    int len, i;
+    len = sizeof(environment);
+    /* serach in the environment for the variable name*/
+    
+    for (i = 0; i < len; i++)
     {
-        if (strcmp(tmp->name, name)== 0)
+        if (strcmp(environment[i].name, name)== 0)
         {
             flag = true;
             if (overwtite != 0)
             {
-                tmp->value = value;
-                /*need to impelement how update the value in enviromant file*/
-                while (bytes_read =  read(fd, buffer, buffer_size) > 0)
-                {
-                    
-                }
+                environment[i].value = value;
             }
         }
-        tmp = tmp->next;
     }
     if (flag == false)
     {
-        add_var(head, name, value);
+        var new_var = malloc(sizeof(var));
+        if (new_var == NULL)
+        {
+            return (-1);
+        }
+        new_var->name = name;
+        new_var->value = value;
+        environment[i] = new_var;
     }
     return (0);
 }
