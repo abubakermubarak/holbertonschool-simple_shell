@@ -22,7 +22,7 @@ typedef struct var
     char *value;
     //struct var *next;
 }var;
-var *environment [10];
+var global envo[10];
 //var *head = NULL;
 char** split(char *string, char *delimiter);
 node* append(node *head , char *string);
@@ -53,7 +53,10 @@ bool in_path(char *string);
 
 /*Find a path */
 char *_which(char *filename);
-
+/* change working dirctory*/
+int _chdir(char *path);
+/* set enviroment variable */
+int set_env(char *name, char *value, int overwrite)
 void env(void);
 #endif /* HOLBERTON_H */
 

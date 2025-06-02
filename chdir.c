@@ -1,15 +1,19 @@
 #include "holberton.h"
+extern  var envo;
 int _chdir(char *path)
 {
   //change current wotking dirctory
   //set enviroment variable ""
-  setenv("PWD", path, 1);
+  set_env("PWD", path, 1);
 
 }
 int main(void)
 {
-    printf("current working dir: %s\n", getenv("PWD"));
-    _chdir("/root/");
-    printf("after cd\n");
-    printf("current working dir: %s\n", getenv("PWD"));
+  int _setenv(char *name, char *value, int overwtite);
+  _chdir("/root/");
+  int len = sizeof(envo) / sizeof(var);
+  for(int i = 0; i < len; i++)
+  {
+    printf("%s=%s\n", envo[i]->name, envo[i]->value);
+  }
 }
