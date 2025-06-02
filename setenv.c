@@ -6,7 +6,14 @@ int _setenv(char *name, char *value, int overwtite, var *head)
     {
         return (-1);
     }
-    bool flag = false;
+    bool flag;
+    flag = false;
+    int fd;
+    ssize_t bytes_read;
+    int buffer_size;
+    buffer_size = 64
+    int buffer[buffer_size];
+    fd = open("ENV.txt", O_RDWR | O_CREAT);
     /* serach in the linkedlist for the variable name*/
     var *tmp = head;
     while (tmp->next != NULL)
@@ -18,6 +25,10 @@ int _setenv(char *name, char *value, int overwtite, var *head)
             {
                 tmp->value = value;
                 /*need to impelement how update the value in enviromant file*/
+                while (bytes_read =  read(fd, buffer, buffer_size) > 0)
+                {
+                    
+                }
             }
         }
         tmp = tmp->next;
