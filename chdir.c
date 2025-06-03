@@ -7,9 +7,10 @@ int _chdir(char *path)
   set_env("PWD", path, 1);
 
 }
+/*
 int main(void)
 {
-  int _setenv(char *name, char *value, int overwtite);
+  //int _setenv(char *name, char *value, int overwtite);
   _chdir("/root/");
   int len = sizeof(envo) / sizeof(var);
   for(int i = 0; i < len; i++)
@@ -17,3 +18,4 @@ int main(void)
     printf("%s=%s\n", envo[i].name, envo[i].value);
   }
 }
+*/
