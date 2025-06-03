@@ -1,5 +1,5 @@
 #include "holberton.h"
-// extern  var envo;
+var envo[10];
 int set_env(char *name, char *value, int overwrite)
 {
     if (name == NULL || strlen(name) == 0 || value == NULL)
