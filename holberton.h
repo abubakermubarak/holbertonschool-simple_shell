@@ -22,7 +22,7 @@ typedef struct var
     char *value;
     //struct var *next;
 }var;
-var envo[10];
+extern var envo[10];
 //var *head = NULL;
 char** split(char *string, char *delimiter);
 node* append(node *head , char *string);
