@@ -9,8 +9,13 @@ void __attribute__ ((constructor)) premain()
  * Return: 0 on success, 1 on error
 */
 
- int main(void)
+
+int main(void)
  {
+	envo[0].name = "USER";
+	envo[0].value = "Default";
+	envo[1].name = "PWD";
+	envo[1].value = "~/holberton";
 	/*
 	* Check if in interactive mode
 	* Check if the command is built-in
@@ -36,18 +41,18 @@ void __attribute__ ((constructor)) premain()
 			lptr[read-1] = '\0';
 			//printf("replaced n with \\0\n");
 		}
+		char **command = split(lptr, " ");
 		if (is_built_in(lptr) == true)
 		{
 			//printf("bulit-in\n");
-			char *command = split(lptr, " ")[0];
-			printf("command : %s\n", command);
+			
 			/* Check if command is exit*/
-			if (strcmp(command, "exit") == 0)
+			if (strcmp(command[0], "exit") == 0)
 			{
 				printf("exiting......\n");
 				exit(-1);
 			}
-			else if(strcmp(command, "env") == 0)
+			else if(strcmp(command[0], "env") == 0)
 			{
 				env();
 				exit(3);
@@ -55,7 +60,7 @@ void __attribute__ ((constructor)) premain()
 			else
 			{
 				
-				path = _which(command);
+				path = _which(command[0]);
 				
 				printf("%s\n", path);
 				// argv[0] = strcpy(argv[0], path);
@@ -68,7 +73,14 @@ void __attribute__ ((constructor)) premain()
 	 	}
 		else
 		{
-			printf("Not built-in\n");
+			printf("name: %s value: %s\n", envo[1].name, envo[1].value);
+			if (strcmp(command[0], "cd") == 0)
+			{
+				printf("cd found\n");
+				_chdir(command[1]);
+				printf("%s\n",envo[1].value);
+			}
+			printf("name: %s value: %s\n", envo[1].name, envo[1].value);
 			exit(1);
 		}
 		
