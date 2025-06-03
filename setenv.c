@@ -1,5 +1,6 @@
 #include "holberton.h"
 var envo[10];
+
 int set_env(char *name, char *value, int overwrite)
 {
     if (name == NULL || strlen(name) == 0 || value == NULL)
@@ -9,9 +10,9 @@ int set_env(char *name, char *value, int overwrite)
     bool flag;
     flag = false;
     int len, i;
-    len = sizeof(envo) / sizeof(var);
-    /* serach in the environment for the variable name*/
     
+    /* serach in the environment for the variable name*/
+    for (len = 0; envo[len].name != NULL; len++);
     for (i = 0; i < len; i++)
     {
         var tmp= envo[i];
@@ -27,8 +28,11 @@ int set_env(char *name, char *value, int overwrite)
     }
     if (!flag)
 	{
+        printf("variable not found\n");
 		for (i = 0; i < len; i++)
 		{
+            printf("loop entred\n");
+            printf("name: %s; value:%s\n", name, value);
 			if (envo[i].name == NULL) // Find the first empty slot
 			{
 				envo[i].name = name;
