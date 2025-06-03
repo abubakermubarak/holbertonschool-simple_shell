@@ -60,12 +60,12 @@ int main(void)
 			else
 			{
 				
-				path = _which(command[0]);
+				command[0] =strcpy(command[0], _which(command[0]));
 				
-				printf("%s\n", path);
+				//printf("%s\n", command[0]);
 				// argv[0] = strcpy(argv[0], path);
 				// printf("Executing command\n");
-				// execute(argv);
+				execute(command);
 				printf("$ ");
 			}
 				
