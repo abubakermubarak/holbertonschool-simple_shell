@@ -5,7 +5,8 @@ int _chdir(char *path)
   //change current wotking dirctory
   //set enviroment variable ""
   /* check if file exists using stat */
-  st t;
+  struct stat *t;
+  t = malloc(1024);
   int len;
   char *dir;
   dir = envo[1].value;
