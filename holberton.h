@@ -22,7 +22,6 @@ typedef struct var
     char *value;
 }var;
 extern var envo[10];
-/*var *head = NULL;*/
 char** split(char *string, char *delimiter);
 node* append(node *head , char *string);
 node* get_path(char **path);
@@ -44,7 +43,7 @@ int execute(char *argv[]);
 void tokenize_command(char *line, char *argv);
 
 /* Fork and Executes a built-in command */
-int execute_builtin(char *command);
+int execute_builtin(char *command, char *arg);
 
 
 /*Checks if the string is found in the Global Variable */
@@ -57,5 +56,6 @@ int _chdir(char *path);
 /* set enviroment variable */
 int set_env(char *name, char *value, int overwrite);
 void env(void);
+int _atoi(char *string);
 #endif /* HOLBERTON_H */
 
