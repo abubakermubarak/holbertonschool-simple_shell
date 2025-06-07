@@ -6,9 +6,9 @@ int _chdir(char *path)
   /*set enviroment variable */
   /* check if file exists using stat */
   struct stat *t;
-  t = malloc(1024);
   int len;
   char *dir;
+  t = malloc(1024);
   dir = envo[1].value;
   len = strlen(dir);
 
