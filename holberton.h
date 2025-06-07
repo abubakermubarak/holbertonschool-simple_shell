@@ -20,7 +20,6 @@ typedef struct var
 {
     char *name;
     char *value;
-    //struct var *next;
 }var;
 extern var envo[10];
 //var *head = NULL;
