@@ -8,48 +8,38 @@ void __attribute__ ((constructor)) premain()
  * main - Simple UNIX shell (Task 2)
  * Return: 0 on success, 1 on error
 */
-
+/*
+* Check if in interactive mode
+* Check if the command is built-in
+* check if the command is "exit"
+* Try to execute the program
+*/
 
 int main(void)
- {
+{
+	char *lptr; 
+	size_t len ;
+	char **command;
+	ssize_t read; 
+	lptr = NULL;
 	envo[0].name = "USER";
 	envo[0].value = "Default";
 	envo[1].name = "PWD";
 	envo[1].value = "~/holberton";
-	/*
-	* Check if in interactive mode
-	* Check if the command is built-in
-	* check if the command is "exit"
-	* Try to execute the program
-	*/
-
-	 char *lptr = NULL;
-	 size_t len = 0;
-	 ssize_t read;
-	 char **argv;
-	 int i = 0;
-	 char *path;
-	 int status;
-	 /* Read lines until EOF (Ctrl+D) */
-	 
+	/* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	{
-		
 		printf("intput: %li chacaters\n", read);
 		if (lptr[read-1] == '\n')
 		{
 			lptr[read-1] = '\0';
-			//printf("replaced n with \\0\n");
 		}
-		char **command = split(lptr, " ");
+		command = split(lptr, " ");
 		if (is_built_in(lptr) == true)
-		{
-			//printf("bulit-in\n");
-			
+		{	
 			/* Check if command is exit*/
 			if (strcmp(command[0], "exit") == 0)
 			{
-				printf("exiting......\n");
 				exit(-1);
 			}
 			else if(strcmp(command[0], "env") == 0)
@@ -59,17 +49,10 @@ int main(void)
 			}
 			else
 			{
-				
 				command[0] =strcpy(command[0], _which(command[0]));
-				
-				//printf("%s\n", command[0]);
-				// argv[0] = strcpy(argv[0], path);
-				// printf("Executing command\n");
 				execute(command);
 				printf("$ ");
-			}
-				
-			
+			}	
 	 	}
 		else
 		{
@@ -85,9 +68,6 @@ int main(void)
 		}
 		
 	}
-	
-	// exit() command not found
- 	//printf("Line 39\n");
 	 free(lptr);
 	printf("\n");
 	return (0);
