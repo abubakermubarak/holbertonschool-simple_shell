@@ -17,7 +17,7 @@ void execute_command(char *line)
 	argv[0] = line;
 	argv[1] = NULL;
 
-	if (execve(argv[0], argv, environ) == -1)
+	if (execve(argv[0], argv, NULL) == -1)
 	{
 		perror("execve");
 		exit(EXIT_FAILURE);
